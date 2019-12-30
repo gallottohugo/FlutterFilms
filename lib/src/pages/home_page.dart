@@ -4,7 +4,13 @@ class HomePage extends StatelessWidget {
   	@override
 	Widget build(BuildContext context) {
     	return Scaffold(
-      		body: Text('Films home page'),
+			
+			appBar: AppBar(
+				title: Text('Films'),
+			),
+      		body: SafeArea(
+				  child: Text('Films home page'),
+			  ),
     	);
   	}
 }
