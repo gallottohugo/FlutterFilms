@@ -1,4 +1,6 @@
+import 'package:films/src/models/actor_model.dart';
 import 'package:films/src/models/movie_model.dart';
+import 'package:films/src/providers/movies_provider.dart';
 import 'package:flutter/material.dart';
 
 class MovieShowPage extends StatelessWidget {
@@ -16,11 +18,24 @@ class MovieShowPage extends StatelessWidget {
 							[
 								SizedBox(height: 10.0,),
 								_newMovieTitle(context, movie),
+								Divider(),
 								_newDescription(context, movie),	
+								_newDescription(context, movie),	
+								_newDescription(context, movie),	
+								_newDescription(context, movie),	
+								Divider(),
+								Container(
+									padding: EdgeInsets.all(20.0),
+									child: Text(
+										'Actors',
+										style: Theme.of(context).textTheme.title,
+									),
+								),
+								_newActors(context, movie),
 							]
 						),
 					)
-				],	
+				],
 			),
 		);
   	}
@@ -99,6 +114,62 @@ class MovieShowPage extends StatelessWidget {
 			child: Text(
 				movie.overview,
 				textAlign: TextAlign.justify,
+			),
+		);
+	}
+
+	Widget _newActors(BuildContext context, Movie movie){
+		final movieProvider = new MoviesProvier();
+		return FutureBuilder(
+		  	future: movieProvider.getActors(movie.id),
+		  	builder: (BuildContext context, AsyncSnapshot<List<Actor>> snapshot) {
+				if (snapshot.hasData){
+					return _newActorsPageView(snapshot.data);
+				} else {
+					return Center(child: CircularProgressIndicator(),);
+				}
+		  	},
+		);
+	}
+
+	Widget _newActorsPageView(List<Actor> actors){
+		return SizedBox(
+			height: 200.0,
+			child: PageView.builder(
+				pageSnapping: false,
+				itemCount: actors.length,
+				controller: PageController(
+					viewportFraction: 0.3,
+					initialPage: 1
+				),
+				itemBuilder: (context, i){
+					return Container(
+						padding: EdgeInsets.all(10.0),
+						child: Column(
+							children: <Widget>[
+								ClipRRect(
+									borderRadius: BorderRadius.circular(20.0),
+									child: FadeInImage(
+										image: NetworkImage(actors[i].getProfileImg()),
+										placeholder: AssetImage('assets/img/no-image.jpg'),
+										fit: BoxFit.cover,
+										height: 100,
+										width: 75.0,
+									),
+								),
+								SizedBox(
+									height: 10,
+								),
+								Center(
+									child: Text(
+										actors[i].name,
+										overflow: TextOverflow.ellipsis,
+									),
+								)
+							],
+						)		
+					);
+				},
 			),
 		);
 	}
