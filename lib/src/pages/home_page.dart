@@ -73,8 +73,7 @@ class HomePage extends StatelessWidget {
 							return CardSwiperHorizontalWidget(movies: snapshot.data,);
 						}
 						else{
-							return Center(child: CircularProgressIndicator());
-								
+							return Center(child: CircularProgressIndicator());	
 						}
 					  },
 					),

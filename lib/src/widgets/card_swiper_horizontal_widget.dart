@@ -39,7 +39,6 @@ class CardSwiperHorizontalWidget extends StatelessWidget {
 								fit: BoxFit.cover,
 								height: 160.0,
 								width: 100.0,
-								
 							),
 						), 
 						SizedBox(height: 5.0,),
