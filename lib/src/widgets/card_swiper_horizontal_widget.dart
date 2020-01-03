@@ -27,18 +27,14 @@ class CardSwiperHorizontalWidget extends StatelessWidget {
 				pageSnapping: false,
 				controller: _pageController,
 				itemCount: movies.length,
-				itemBuilder: (context, i){
-					return _card(context, movies[i]);
-				},
-
-				
+				itemBuilder: (context, i) => _card(context, movies[i])
 			),
     	);
   	}
 
 
 	Widget _card(BuildContext context, Movie movie){
-		return Container(
+		Container card = Container(
 			margin: EdgeInsets.only(right: 15.0),
 			child: Column(
 				children: <Widget>[
@@ -62,6 +58,13 @@ class CardSwiperHorizontalWidget extends StatelessWidget {
 					)
 				],
 			),
+		);
+
+		return GestureDetector(
+			child: card,
+			onTap: (){
+				Navigator.pushNamed(context, 'movies_show', arguments: movie); 
+			},
 		);
 	}
 }
