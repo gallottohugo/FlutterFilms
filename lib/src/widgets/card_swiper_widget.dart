@@ -26,8 +26,11 @@ class CardSwiperWidget extends StatelessWidget {
 				//pagination: new SwiperPagination(),
         		//control: new SwiperControl(),
         		itemBuilder: (BuildContext context, int index){
+					//create a new id to hero animation
+					movies[index].uniqueId = '${movies[index].id}-main-card';
+					
           			Hero heroCard = Hero(
-						tag: movies[index].id,
+						tag: movies[index].uniqueId,
 						child: ClipRRect( 
 							borderRadius: BorderRadius.circular(20),
 							child: FadeInImage(

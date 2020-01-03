@@ -69,7 +69,7 @@ class MovieShowPage extends StatelessWidget {
 			child: Row (
 				children: <Widget>[
 					Hero(
-						tag: movie.id,
+						tag: movie.uniqueId,
 						child: ClipRRect(
 							borderRadius: BorderRadius.circular(10),
 							child: Image(
