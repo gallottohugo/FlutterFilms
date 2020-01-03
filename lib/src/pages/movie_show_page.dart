@@ -68,11 +68,14 @@ class MovieShowPage extends StatelessWidget {
 			padding: EdgeInsets.symmetric(horizontal: 10.0),
 			child: Row (
 				children: <Widget>[
-					ClipRRect(
-						borderRadius: BorderRadius.circular(10),
-						child: Image(
-							image: NetworkImage(movie.getPosterImg()),
-							height: 150.0,
+					Hero(
+						tag: movie.id,
+						child: ClipRRect(
+							borderRadius: BorderRadius.circular(10),
+							child: Image(
+								image: NetworkImage(movie.getPosterImg()),
+								height: 150.0,
+							),
 						),
 					),
 					SizedBox(width: 20.0,),
