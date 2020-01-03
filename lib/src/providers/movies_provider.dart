@@ -8,6 +8,7 @@ class MoviesProvier{
     String _apiKey = 'e799781b8e4bccca31d1eb4462d736ad';
   	String _language = 'en-US';
 	int _page = 0;
+	bool _loading = false;
 
 
 	//STREAM
@@ -40,7 +41,11 @@ class MoviesProvier{
 	}
 
 	void getPopulars() async {
-		_page ++;
+
+		if (_loading) return;
+		
+		_loading = true;
+		_page++;
 
 		final url = Uri.https(_url, '3/movie/popular', {
 			'api_key' : _apiKey,
@@ -51,5 +56,7 @@ class MoviesProvier{
 		final response = await getResponse(url);
 		_popular_movies.addAll(response);
 		popularSink(_popular_movies);
+
+		_loading = false;
 	}
 }
