@@ -73,6 +73,18 @@ class Movie {
 			return 'https://image.tmdb.org/t/p/w500$posterPath';
 		}
 	}
+
+	getBackgroundImg(){
+		if (backdropPath == null){
+			return 'https://www.gumtree.com/static/1/resources/assets/rwd/images/orphans/a37b37d99e7cef805f354d47.noimage_thumbnail.png';
+		}
+		else {
+			return 'https://image.tmdb.org/t/p/w500$backdropPath';
+		}
+	}
+
+
+
 }
 
 
