@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:films/src/models/actor_model.dart';
 import 'package:films/src/models/movie_model.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class MoviesProvier{
@@ -22,10 +24,7 @@ class MoviesProvier{
 	}
 
 
-
-	
-
-	Future<List<Movie>> getResponse(Uri url) async{
+	Future<List<Movie>> _connectToServer(Uri url) async{
 		final response = await http.get(url);
 		final decodedData = json.decode(response.body);
 		final movies = Movies.fromJsonList(decodedData['results']);
@@ -37,7 +36,7 @@ class MoviesProvier{
 			'api_key': _apiKey,
 			'language': _language
 		});
-		return getResponse(url);
+		return _connectToServer(url);
 	}
 
 	void getPopulars() async {
@@ -53,10 +52,23 @@ class MoviesProvier{
 			'page'    : _page.toString()
 		});
 
-		final response = await getResponse(url);
+		final response = await _connectToServer(url);
 		_popular_movies.addAll(response);
 		popularSink(_popular_movies);
 
 		_loading = false;
+	}
+
+
+	Future<List<Actor>> getActors (int movie_id) async {
+		final url = Uri.https(_url, '3/movie/$movie_id/credits', {
+			'api_key': _apiKey,
+			'language': _language
+		});
+
+		final response = await http.get(url);
+		final decodedData = json.decode(response.body);
+		final actors = Actors.fromJsonList(decodedData['cast']);
+		return actors.actors;
 	}
 }
