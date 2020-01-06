@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:films/src/models/actor_model.dart';
 import 'package:films/src/models/movie_model.dart';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class MoviesProvier{
@@ -70,5 +70,16 @@ class MoviesProvier{
 		final decodedData = json.decode(response.body);
 		final actors = Actors.fromJsonList(decodedData['cast']);
 		return actors.actors;
+	}
+
+
+
+	Future<List<Movie>> searchFilm(String query) async {
+		final url = Uri.https(_url, '3/search/movie', {
+			'api_key': _apiKey,
+			'language': _language,
+			'query': query
+		});
+		return await _connectToServer(url);
 	}
 }
