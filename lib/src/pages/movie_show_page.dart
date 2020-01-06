@@ -20,9 +20,6 @@ class MovieShowPage extends StatelessWidget {
 								_newMovieTitle(context, movie),
 								Divider(),
 								_newDescription(context, movie),	
-								_newDescription(context, movie),	
-								_newDescription(context, movie),	
-								_newDescription(context, movie),	
 								Divider(),
 								Container(
 									padding: EdgeInsets.all(20.0),
