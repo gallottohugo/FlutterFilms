@@ -40,6 +40,9 @@ class MovieShowPage extends StatelessWidget {
 
 	Widget _newAppBar(Movie movie){
 		return SliverAppBar(
+			iconTheme: null,
+			leading: null,
+			stretch: true,
 			elevation: 2.0,
 			backgroundColor: Colors.indigoAccent,
 			expandedHeight: 200.0,

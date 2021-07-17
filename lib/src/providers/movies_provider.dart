@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:flutter/material.dart';
 import 'package:films/src/models/actor_model.dart';
 import 'package:films/src/models/movie_model.dart';
 import 'package:http/http.dart' as http;
+
 
 class MoviesProvier{
 	String _url = 'api.themoviedb.org';
